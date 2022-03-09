@@ -100,3 +100,28 @@
   - NoSQL
     - Horizontal Scaling
     - You scale by adding more machines, partition or low-cost hardware to increase the throughtput of your database
+    - Infact, with DAX (Dynamo Accelerator) you can bring down the response times from Milliseconds to microseconds at any scale, which is quite a Stellar Performance in my opinion.
+
+- Interaction API's
+  - SQL
+    - Uses SQL (Structured Query Language) for interaction
+  - NoSQL
+    - Uses Object-based API's for interaction (use Partition Key or Primary Keys)
+
+### Types of NoSQL Databases
+
+    - Columnar Database - Dataware housing and analytics - Apacha Casandra / HBase, Redshift
+    - Key-Value Store - Optimized for Read/ Compute Heavy Applications/ Workloads - Redis, Couchbase, Memcached, DynamoDB
+    - Graph Database - Good fit for data like GRAPH/TREE Structure (Node-Edge Relations) - Neo4J, GraphDB
+    - Document Database - To Store Semistructured data as documents (JSON or XML Documents, Schemaless, Flexible) - MongoDB, DynamoDB, CouchBase
+
+- DynamoDB supports API Operations in JSON(Javascript Object Notations) Format
+
+### JSON Fundamentals
+
+- JSON
+  - Javascript Object Notation
+  - Simple and Popular Format
+  - Used to exchange data over the API's
+  - JSON is now widely used for data-interchange over the internet and is replacing XML very very fast
+  - use "https://jsonlint.com" to validate JSON Object

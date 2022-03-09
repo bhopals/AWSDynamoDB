@@ -15,3 +15,5 @@ AWS Dynamo DB
 - Huge Volumes of Data
 - High Frequency Data
 - Big Data (Volume, Velocity, Variety)
+- You can bring down the response times from Milliseconds to microseconds at any scale
+- Which is quite a Stellar Performance in my opinion.
