@@ -111,7 +111,7 @@
 ### Types of NoSQL Databases
 
     - Columnar Database - Dataware housing and analytics - Apacha Casandra / HBase, Redshift
-    - Key-Value Store - Optimized for Read/ Compute Heavy Applications/ Workloads - Redis, Couchbase, Memcached, DynamoDB
+    - Key-Value Store - Optimized for Read/ Compute Heavy Applications/ Workloads - Redis, CouchBase, Memcached, DynamoDB
     - Graph Database - Good fit for data like GRAPH/TREE Structure (Node-Edge Relations) - Neo4J, GraphDB
     - Document Database - To Store Semistructured data as documents (JSON or XML Documents, Schemaless, Flexible) - MongoDB, DynamoDB, CouchBase
 
