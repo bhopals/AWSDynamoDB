@@ -18,6 +18,17 @@ High Velocity (Huge No. of Concurrent Read Write Operations))
 
 ### Terminology Comparison with SQL
 
+SQL / DynamoDB
+
+- Tables / Tables
+- Rows / Items
+- Columns / Attributes
+- Primary Keys - Multicolumn and Optional / Primary Keys - Mandatory, Minimum One and Maximum Two Attributes (Partition Key (Mandatory) and Sort Key (Optional))
+- Indexes / Local Secondary Indexes (Share the Partition Key with Partition Key of Primary KEY of Table but have different SORT KEY)
+- Views / Global Secondary Indexes (Partition Key is different than Partion key of Primary KEY of Table and have different SORT KEY)
+
+- DynamoDB Must Have PRIMARY KEY (Partition Key (Mandatory) + Sort Key (Optional))
+
 ### DynamoDB Tables and Naming Conventions
 
 ### Data Types in DynamoDB
