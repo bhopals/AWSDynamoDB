@@ -80,8 +80,8 @@ DYNAMODB - FLEXIBLE SCHEMA
 ### DynamoDB Consistency model
 
 - AWS REGION
-  - 1 or More Availibilit Zones
-    - 1 or More Facilities
+  - ONE or More Availibilit Zones
+    - ONE or More Facilities
 
 DynamoDB Automatic Synchronous Replication
 
