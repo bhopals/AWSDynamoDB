@@ -31,6 +31,11 @@ SQL / DynamoDB
 
 ### DynamoDB Tables and Naming Conventions
 
+DynamoDB Tables are TOP LEVEL ENTITIES, INDEPENDENT ENTITIES (Cannot have TWO Tables JOINED/CONNECTED), FLEXIBLE SCHEMA
+
+RELATION DB - STRICT ACID - STRICT SCHEMA
+DYNAMODB - FLEXIBLE SCHEMA
+
 ### Data Types in DynamoDB
 
 ### DynamoDB Consistency model
