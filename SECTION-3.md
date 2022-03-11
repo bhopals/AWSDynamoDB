@@ -79,6 +79,30 @@ DYNAMODB - FLEXIBLE SCHEMA
 
 ### DynamoDB Consistency model
 
+- AWS REGION
+  - 1 or More Availibilit Zones
+    - 1 or More Facilities
+
+DynamoDB Automatic Synchronous Replication
+
+High Availibility
+
+- 3 Copies of data within a REGION
+- Act as Independent Failure Domains
+- Near Real-Time Replication
+
+DynamoDB Read Consistency
+
+- Strong Consistency
+
+  - The most up-to-date data
+  - Must be requested EXPLICITY
+
+- Eventual Consistency
+  - May or may not reflect the latest copy of data
+  - Default consistency for all operations
+  - 50% Cheaper
+
 ### DynamoDB Capacity Units
 
 ### Basics of DynamoDB Partitions
