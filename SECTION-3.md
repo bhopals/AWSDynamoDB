@@ -27,7 +27,7 @@ SQL / DynamoDB
 - Indexes / Local Secondary Indexes (Share the Partition Key with Partition Key of Primary KEY of Table but have different SORT KEY)
 - Views / Global Secondary Indexes (Partition Key is different than Partion key of Primary KEY of Table and have different SORT KEY)
 
-- DynamoDB Must Have PRIMARY KEY (Partition Key (Mandatory) + Sort Key (Optional))
+- DynamoDB Must Have PRIMARY KEY (Partition/Hash Key (Mandatory) + Sort Key (Optional))
 
 ### DynamoDB Tables and Naming Conventions
 
@@ -37,6 +37,45 @@ RELATION DB - STRICT ACID - STRICT SCHEMA
 DYNAMODB - FLEXIBLE SCHEMA
 
 ### Data Types in DynamoDB
+
+- Scalar Types
+
+  - Exactly one value
+  - e.g. string, number, binary, boolean, and null
+  - String - Non-Empty Value
+  - String used as a Primary KEY - 2KB
+  - String used as a Sort KEY - 1KB
+  - Binary - Blobs of Binary Data (Compressed Text, Encrypted Data, Images)
+  - Keys or Index attributes only support string, number, and binary scalar types
+
+- Set Types
+
+  - Multiple scalar values
+  - e.g. string set, number set, and binary set
+  - Unordered collection of Strings
+  - No duplicates allowed
+  - All values must be of same scalar type
+
+- Document Types
+
+  - Complex structure with nested attributes (JSON objects)
+  - e.g. List and Map
+  - Nested up to 32 Levels DEEP
+  - Lists
+    - Ordered Collection of values
+    - Can have multiple data types
+    - e.g. ["John", 128.88, "Apples"]
+  - Maps
+    - Unordered collection of Key-Value Pairs
+    - Ideal for storing JSON Documents
+    - e.g. { name: "john", age: 22, { address: : {....}}}
+
+- When we create a Table or an Index such as Local or Global Secondary index, we must specify the data type for each of the KEYs.
+- KEYs of any table can only be of Certain SCALAR Data Types - Number, String, Binary
+- You cannot use Boolean, Null, Set, List, Map data types to Define the Primary Key or Any of the Indexes of your Table.
+- Each Item (Row) is limited to 400KB Size
+- String used as a Primary KEY - 2KB
+- String used as a Sort KEY - 1KB
 
 ### DynamoDB Consistency model
 
