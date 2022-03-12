@@ -74,8 +74,8 @@ DYNAMODB - FLEXIBLE SCHEMA
 - KEYs of any table can only be of Certain SCALAR Data Types - Number, String, Binary
 - You cannot use Boolean, Null, Set, List, Map data types to Define the Primary Key or Any of the Indexes of your Table.
 - Each Item (Row) is limited to 400KB Size
-- String used as a Primary KEY - 2KB
-- String used as a Sort KEY - 1KB
+- String used as a Primary Key - 2KB
+- String used as a Sort Key - 1KB
 
 ### DynamoDB Consistency model
 
