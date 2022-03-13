@@ -79,7 +79,7 @@ DYNAMODB - FLEXIBLE SCHEMA
 
 ### DynamoDB Consistency model
 
-- AWS REGION
+- AWS REGIONS
   - ONE or More Availibilit Zones
     - ONE or More Facilities
 
