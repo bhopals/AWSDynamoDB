@@ -4,6 +4,9 @@
 
 - `npm init`
 - `npm install aws-sdk --save`
+- `const AWS = require('aws-sdk')`
+- `AWS.config.update({region: 'us-west-2'})`
+- `const docClient = new AWS.DynamoDB.DocumentClient()`
 
 ### Table Level Operationss with AWS SDK
 
@@ -50,4 +53,13 @@
 
 ### Read Operations - Item Level Operations with AWS SDK
 
+- `batchGet` - Can be used to Query Data from Multiple Tables
+
 ### Paginated Reads - Item Level Operations with AWS SDK
+
+- Any time the result of a Query or Scan Operaion is limited by the data size limit of 1MB or by the `limit` parameter that we
+  explicitly specify.
+- If we use the limit param, then the DynamoDB response contains `LastEvaluatedKey`
+- `LastEvaluated` Key is simply the set of Index Attributes of the Next ITEM up to which the response was returned.
+- This data can be used in Subsequent Query/Scan to get the Next SET of Data
+- In Node, use `async.doWhilst` to retrieve all the data using limit
