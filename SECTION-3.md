@@ -180,6 +180,19 @@ as The Throughput capacity is equally distibuted among all the Partitions.
 
 ### Basics of DynamoDB Indexes
 
+- Table Index
+
+  - Mandatory Primary Key - Either Simple or Composite
+  - Simple Primary Key => Only Partition or Hash key
+  - Composite Primary Key => Partition Key + Sort or Range Key
+  - Partition or Hash Key decides the target partition
+
+- Hashing
+  - Partition Key ==> Hashing Algorithm ==> P1, P2
+
+Scan operations does not require Partition Key. However, the Query opertation Does.
+Use of Scan Operation indicates an insufficient data modeling activity.
+
 ### Local Secondary Indexes and Global Secondary Indexes
 
 ### Interacting with DynamoDB
