@@ -161,6 +161,23 @@ DynamoDB Read Consistency
 
 ### Basics of DynamoDB Partitions
 
+- Store DynamoDB table data
+- A Partition is a block of memory allocated by DynamoDB for storage
+- A table can have multiple partitions
+- Number of table partitions depend on its size and provisioned capacity
+- Managed internally by DynamoDB
+- 1 Partition = 10GB of data (Maximum)
+- 1 Partition = 1000 WCUs or 3000 RCUs (Maximum)
+
+- Partition Behavior - Example
+  - Provisioned Capacity: 500 RCUs and 500 WCUs
+    - Number of Partitions (P1) => (500 RCUs/3000 + 500 WCUs/1000) = 0.67 => rounded up => 1 Partitions
+  - New Capacity: 1000 RCUs and 1000 WCUs
+    - Number of Partitions (P1) => (1000 RCUs/3000 + 1000 WCUs/1000) = 1.33 => rounded up => 2 Partitions of 500 RCU and 500 WCU Each
+
+Once allocated, it will not be deallocated automatically once we scale down, and that could result in lower thoughput capacity
+as The Throughput capacity is equally distibuted among all the Partitions.
+
 ### Basics of DynamoDB Indexes
 
 ### Local Secondary Indexes and Global Secondary Indexes
