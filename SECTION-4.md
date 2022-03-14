@@ -21,3 +21,15 @@
   - This is the reason why Well-thought-out data modeling is very crucial when working with DynamoDB.
   - We should choose Table Keys and Indexes very carefully considering all the different possibilities of query operations
     that our Application might need to perform now as well as in future.
+
+## Additional Features in DynamoDB Console
+
+- All Types of Metrics (Error, Query, Success, Latency, Request by GSI or LSI)
+- Scaling Activities
+- Provisioned Capacity
+- ALARMS
+- Global Table (Mutli Region Table)
+- Backups
+- Triggers (Connect DynamoDB Streams to Lambda Function)
+- Access Control
+- Tags
