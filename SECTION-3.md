@@ -216,3 +216,8 @@ Use of Scan Operation indicates an insufficient data modeling activity.
     create a Global Secondary Indexes with Locations (Partition key), Date of Joining (Sort key)
 
 ### Interacting with DynamoDB
+
+- Different Ways to Work with DynamoDB
+  - AWS Management Console
+  - AWS CLI
+  - AWS CDK
