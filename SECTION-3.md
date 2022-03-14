@@ -105,6 +105,60 @@ DynamoDB Read Consistency
 
 ### DynamoDB Capacity Units
 
+- DynamoDB Tables
+
+  - Top-level entities
+  - No stric inter-table relationships
+  - Mandatory primary keys
+  - Control performance at the table level
+
+- Throughput Capacity
+
+  - Allows for predictable performance at scale
+  - Used to control read/write throughput
+  - Supports auto-scaling
+  - Defined using RCUs and WCUs
+  - Major factor in DynamoDB Pricing
+  - 1 capacity unit = 1 request/sec
+
+- RCUs
+
+  - Read Capacity Units
+  - 1 RCU = 1 strongly consistent table read/second
+  - 1 RCU = 2 eventually consistent table read/second
+  - In blocks of 4KB
+
+- WCUs
+
+  - Write Capacity Units
+  - 1 WCU = 2 table write/second
+  - In blocks of 1KB
+
+- Example (RCUs and WCUs)
+
+  - Average Item Size: 10KB
+  - Provisioned Capacity: 10 RCUs and 10 WCUs
+  - Read Throughtput with strong consistency = 4KB x 10 = 40KB/second
+  - Read throughput = 2(4KB x 10) = 80KB/second
+  - Write throughput = 1KB x 10 = 10KB/second
+  - RCU's to read 10KB of data per second with strong consistency = 10KB/4KB = 2.5 => rounded up => 3 RCUs
+  - RCU's to read 10KB of data per second = 3 RCUs x 0.5 = 1.5 RCUs
+  - WCUs to write 10KB of data per second = 10KB/1KB = 10 WCUs
+  - WCUs to write 1.5KB of data per second = 1.5KB/1KB = 1.5 => rounded up => 2 WCUs
+
+- Burst Capacity
+
+  - To provide for occassional bursts or spikes
+  - 5 minutes or 300 seconds of unused read and write capacity
+  - Can get consumed quickly
+  - Must not be relied upon
+
+- Scaling
+  - Scaling UP: As and when needed
+  - Scaling Down: Up to 4 times in a day
+  - Affects Partition Behavior
+  - 1 Partition supports up to 1000 WCUs or 3000 RCUs
+
 ### Basics of DynamoDB Partitions
 
 ### Basics of DynamoDB Indexes
