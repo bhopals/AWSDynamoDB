@@ -190,9 +190,29 @@ as The Throughput capacity is equally distibuted among all the Partitions.
 - Hashing
   - Partition Key ==> Hashing Algorithm ==> P1, P2
 
-Scan operations does not require Partition Key. However, the Query opertation Does.
+Scan operations does not require Partition Key. However, DynamoDB require us to specify the Partition Key for all Query opertations.
 Use of Scan Operation indicates an insufficient data modeling activity.
 
 ### Local Secondary Indexes and Global Secondary Indexes
+
+- DynamoDB internally creates an Index based on the Primary Key
+- Example Table = Dept (Partition key), Emp ID (Sort key), Name, Age, Location, Date of Joining
+- Local Secondary Indexes
+  - This type of Index will have the partition key same as our Primary Key
+  - Can only be created at the Time of Table Creation
+  - Can have up to 5 Local Secondary Indexes
+  - The RCU and WCU will be shared across all of your Local Secondary Indexes that you create (Shared with the Base Capacity Unit of the Table)
+  - Use Case - You want to retrieve Dept List sorted by Date of Joining. To do that
+    create a Local Secondary Indexes with Dept (Partition key), Date of Joining (Sort key)
+  - Perform Strong and Eventual Consistent READS
+- Global Secondary Indexes
+  - When your partition key is different from the primary key of the Table
+  - Can have up to 5 Global Secondary Indexes
+  - Global Secondary Indexes will have their own Throughput Capacities (Not shared with the Base Capacity Unit of the Table)
+  - Can be created any time
+  - CAN ONLY perform Eventual Consistency READS
+  - You can have Duplicate Items in Global Secondary Indexes (unlike Primary key where it should be UNIQUE)
+  - Use Case - You want to retrieve Locations sorted by Date of Joining. To do that
+    create a Global Secondary Indexes with Locations (Partition key), Date of Joining (Sort key)
 
 ### Interacting with DynamoDB
