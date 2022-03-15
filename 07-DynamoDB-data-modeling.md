@@ -95,6 +95,94 @@
 
 ### DynamoDB Efficient Key Design
 
+- The KEY design in DynamoDB is one of the crucial aspects of ensuring efficient and cost effective performance from DynamoDB
+- Choosing the table KEYs wisely ensure an efficient and cost effective performance from DynamoDB
+- DynamoDB KEYS
+  - Simple Keys: PARTITION KEY
+    - Means Each one of the Partition Key can Occur only exactly once in the Table
+  - Composite Keys: PARTITION KEY + SORT KEY
+    - Means a Partition Key can Occur Multiple Times in the Table, as long as the combination of BOTH is UNIQUE across the Table
+- An INDEX Attribute, which include partition and sort attributes, can only use SCALAR Types (string, number, or binary)
+- No other Data types, such as OBJECT or ARRAY, can be used as an INDEX attribute
+
+- Data Distribution
+
+  - Ensure uniform distribution of data across partitions
+  - Use as many unique values for partition key as possible
+
+- Read/Write Patterns
+  - RCUs and WCUs get equally distributed between the partitions
+  - Prevent hot Partitions
+  - Ensure UNIFORM Utilization of RCUs and WCUs
+  - `Hash = f(Partition Key, Size)`
+  - Only PARTITION key Influence the partition choice that Dynamo makes; However, SORT key does not.
+  - Sort Key is only used to Influence the ORDERING of ITEMS within a Partition
+  - Provisioned RCUs and WCUs are equally distributed between all the Partitions
+  - The Partition Keys should be Choosen so our READS and WRITES are UNIFORMLY DISTIBUTED across the partition key values
+  - For Example
+    - If we have 10 PARTITIONS and 1000 RCUs Provisioned, then EACH Partition will receive about 100 RCUs
+    - And if our Application request ITEMS from a Single Partition, most of the times (because of non-unique partition key) (HOT Partition),
+      while other partitions remains idle, only about 100 RCUs which are allocated to that Particular Partition will be UTILIZED,
+      and remaning 900 RCUs remains UNUTILIZED.
+- Ideally the Partition key is selected in a way that our DATA of our Application is DISTRIBUTED UNIFORMALY ACROSS PARTITIONS.
+  Then READ Operations will be performed uniformly across partitions means all 1000 RCUs could be utilized.
+- This not only ensures efficient utilization of the provisioned capacity, and thereby efficient use of DOLLARS($$$$),
+  But also ensure that our application performs at the DESIRED THROUGHPUT.
+
+- Times Series Data
+
+  - Segregate HOT and COLD data into a Separate Tables
+
+- Scan Operations and Filters
+
+  - Always Perfer QUERY Operations as it only search within the specified partition
+  - Choose Keys and Indexes so as to Avoid SCAN (Full Table SCAN/All Partitions SCAN) Operations and Filters
+  - We must Always specify the COMPLETE PARTITON Key
+  - Filters are always applied after the READ operation has been Performed
+
+- Secondary Indexes
+
+  - Local Secondary Indexes(LSI)
+    - Same Partition Key as Table Index
+    - Use Table Throughput (Capacity Units)
+    - Max Limit = 5
+  - Global Secondary Indexes(GSI)
+    - Different Partition than the Table Index
+    - Use its own Throughput (Capacity Units)
+    - Max Limit = 5
+
+- When to Choose between LSI vs GSI
+
+  - Local Secondary Indexes
+    - When application needs same partition key as the Table
+    - When you need to avoid additional Costs
+    - When application needs strongly consistent Index Reads
+  - Global Secondary Indexes
+    - When application needs different or same partition key as the table
+    - When application needs FINER THROUGHPUT CONTROL
+    - When application only needs eventual consistent index reads
+
+- Item Size
+  - Max Size per Item = 400KB
+  - Prefer SHORTER (Yet Intuitive) attribute names over long and descriptive once
+- Index Attribute Size for string and binary data types
+
+  - Max Size of simple Partition Key = 2 KB
+  - Max Size of composite partition key = 1KB
+  - Max Size of sort key = 1 KB
+
+- SUMMARY (EFFICIENT KEY DESIGN)
+- Partition Key should have many Unique values
+- Uniform distribution of Read/Write operations across partitions
+- Store Hot and Cold data in separate tables
+- Consider all possible query patterns to eliminate use of scna operations and filters
+- Choose SORT key depending on your application needs
+- Use INDEXES based on when your application's query patterns
+- Use Primary KEY or Local Secondary Indexes when Strong Consistency is desired
+- Use Global Secondary Index for finer control over throughput or when your
+  application needs to query using a different partition key
+- Use shorter Attribute name (Per Item limit 400KB)
+
 ### Hot Keys or Hot Partitions
 
 ### DynamoDB Design Patterns
