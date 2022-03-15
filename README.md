@@ -26,3 +26,4 @@ AWS Dynamo DB
 - Composite Keys: (PARTITION KEY + SORT KEY) - Means a Partition Key can Occur Multiple Times in the Table, , as long as the combination of BOTH is UNIQUE across the Table
 - The Partition Keys should be Choosen so our READS and WRITES are UNIFORMLY DISTIBUTED across the partition key values
 - Segregate HOT and COLD data into a Separate Tables
+- To Achieve ATOMICITY, we can use ATOMIC Counter/Views in Dynamo Table. Means if there are Simultaneous requests to increment a variable, all these requests will be applied in ORDER in which they wre received.
