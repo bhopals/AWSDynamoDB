@@ -121,7 +121,7 @@
   - The Partition Keys should be Choosen so our READS and WRITES are UNIFORMLY DISTIBUTED across the partition key values
   - For Example
     - If we have 10 PARTITIONS and 1000 RCUs Provisioned, then EACH Partition will receive about 100 RCUs
-    - And if our Application request ITEMS from a Single Partition, most of the times (because of non-unique partition key) (HOT Partition),
+    - And if our Application request ITEMS from a Single Partition, most of the times (because of non-unique partition key),
       while other partitions remains idle, only about 100 RCUs which are allocated to that Particular Partition will be UTILIZED,
       and remaning 900 RCUs remains UNUTILIZED.
 - Ideally the Partition key is selected in a way that our DATA of our Application is DISTRIBUTED UNIFORMALY ACROSS PARTITIONS.
@@ -184,6 +184,42 @@
 - Use shorter Attribute name (Per Item limit 400KB)
 
 ### Hot Keys or Hot Partitions
+
+- BEST PRACTICE - Spread the data UNIFORMLY ACROSS PARTITIONS
+- Our keys should be chosen in a way that READS/WRITES are uniformly distributed across the partition key values - As uniformly as possible.
+
+- What happens when DynamoDB sees an non-uniform ACCESS PATTERNS?
+- Two popular use cases here:
+
+  - Time Series Data
+
+    - Your application might sore data based on date and times
+    - Not a good idea to create MONTH/DAY or Time Series as Partition key as we may end up with HOT Partitions.
+
+    - To Avoid that,
+      1. Either we create a separate table with Time Series data instead of storing YEAR/MONTH/DAY as partition KEY
+      2. OR we can cache the HOT data using DynamoDB Accelerator (DAX), which is a caching service
+
+  - Popular Datasets
+    - Example - Voting for top 10 contestants in a compition. Usually TOP 3 tends to get More votes than others.
+      - 10 contestants = C1, C2, C3, C4, C5, C6, C7, C8, C9, C10
+      - 80% of the votes are divided in top 2-3 and rest 20% goes to remainig 7-8
+      - This is a typical case of non-uniform load (If we make partition key with contestant name)
+      - In case of NON-UNIFORM READ/WRITE, the table throughput will not be utilized well.
+      - Resulting of that, there could be throttling of requests leading to incoming votes being rejected
+      - So how do we ensure that we do not endup creating HOT Partitions with excessive throttling.
+      - THE SOLUTION IS SOMETHING CALLED - SHARDING
+      - Shard is nothing but another word for Partition.
+      - Meaning we could split our partition keys into more partitions.
+        - For example - C1 ==> C1_1, C1_2, C1_3, C1_4, C1_5, C1_6, C1_7, C1_8, C1_9, C1_10
+        - WRITE Operations - We can WRITE to any of the partition key started with "C1\_"
+        - READ Operations - We can use SHARD AGGREGATION
+        - Shard is nothing but another word for Partition
+        - So we simply use batched GET ITEM API Operation and the the 10 keys (C1_1...C1_10) to retrieve the result.
+        - This way we are able to spread the load on HOT partitions into multiple partitions and prevent operations being throttled.
+
+- These partitions that experience substantial amount of read/write operations as compared to other partitions are called HOT Partitions.
+  And these keys can be called HOT Keys.
 
 ### DynamoDB Design Patterns
 

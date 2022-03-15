@@ -27,3 +27,6 @@ AWS Dynamo DB
 - The Partition Keys should be Choosen so our READS and WRITES are UNIFORMLY DISTIBUTED across the partition key values
 - Segregate HOT and COLD data into a Separate Tables
 - To Achieve ATOMICITY, we can use ATOMIC Counter/Views in Dynamo Table. Means if there are Simultaneous requests to increment a variable, all these requests will be applied in ORDER in which they wre received.
+- Spread the data UNIFORMLY ACROSS PARTITIONS - READ/WRITES are Uniformaly Distributed across partitions
+- Prevent Operation being Throttled
+- Shard Aggregation using - Batch GET ITEM API
