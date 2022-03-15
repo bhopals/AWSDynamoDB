@@ -63,7 +63,7 @@
   - And this does not effect the entire data in the table, just a small subset of it.
   - Since the total number of possible NODES in dynamoDB is fairly large, DynamoDB is able to calculate the HASH of
     the item consistently and locate the give item, even if the number of partitions change in future.
-  - Moreover, since DynamoDB replicates the data to atleast three nodes, this also provides for load balancing
+  - Moreover, since DynamoDB replicates the data to atleast three nodes, this also provides load balancing
 
 ### DynamoDB Partitions in Depth
 
