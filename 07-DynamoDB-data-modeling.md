@@ -49,7 +49,7 @@
   - DynamoDB nodes are spread over this ring in a circular fashion.
   - Let's say we have FOUR nodes or partitions in our table located at position 17th, 53rd, 64th, and 80th (Within all 100 Positions)
   - Whenever there is an item to be stored, DynamoDB computes the hash using Partition key and the MAX size of the ring
-  - The resulting hash will return a Number between 0 to 99
+  - The resulting hash will return a Number between 0 to 99 (For example we have 100 Nodes in a ring, ideally its more than that)
   - If the computed HASH has returned a NUMBER, lets say EIGHT(8), DynamoDB locates the position 8,
   - And then goes around the ring and find the next NODE which is 17th (in our case)
   - So the item is stored in the NODE 17th and also REPLICATED and COPIED to the next TWO nodes(53rd, and 64th)
