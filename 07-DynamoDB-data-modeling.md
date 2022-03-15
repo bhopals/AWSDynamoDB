@@ -67,6 +67,32 @@
 
 ### DynamoDB Partitions in Depth
 
+- One DynamoDB Partition can deliver up to - 1000 WCUs, 3000 RCUs, and 10GB of storage (SSD)
+- Formula for calculation no. of partitions based on THROUGHPUT requirement is = P(t) = `Round up[(RCUs/3000) + (WCUs/1000)]`
+- Formula for calculation the STORAGE requirement is = P(s) = `Round up[(Storage required in GB / 10 GB)]`
+- The Final Formula to calculate required no. of Partition based on BOTH THROUGHPUT and STORAGE will be = P = `max(P(t), P(s))`
+- Example 1
+
+  - 1000 RCUs, 500 WCUs, 50GB
+  - P(t) = `Round up[(1000/3000) + (500/1000)]`
+    P(t) = `Round up[0.67]`
+    P(t) = 1
+  - P(s) = `Round up[(50GB/10GB)]`
+    P(s) = `Round up[50]`
+    P(s) = 5
+  - P = `max(1,5)`
+    P = 5
+
+  - RCUs per Partition = 1000 / 5 = 200 RCUs
+  - WCUs per Partition = 500 / 5 = 100 WCUs
+  - It will have 5 Partitions each of 10GB with 200 RCUs and 100 WCUs
+  - Remember RCU and WCU capacity is shared across the partitions
+
+- Example 2
+  - 1000 RCUs, 500 WCUs, 500GB
+  - It will have 50 Partitions each of 10GB with 20 RCUs and 10 WCUs (With above calculated Formaula - P(t), P(s), P)
+- DynamnoDB does not reduce or deallocate a partition once it is assigned
+
 ### DynamoDB Efficient Key Design
 
 ### Hot Keys or Hot Partitions

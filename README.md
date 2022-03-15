@@ -21,3 +21,4 @@ AWS Dynamo DB
 - DynamoDB uses several techniques such as CONSISTENT HASHING to STORE/RETRIEVE data reliably
 - The returned HASH from Hash Algo. uniquely identifies a place to store a Particular table item within DynamoDB Distributed System of Nodes or Clusters
 - A Predictable and Consistent Performance at SCALE
+- DynamnoDB does not reduce or deallocate a partition once it is assigned
