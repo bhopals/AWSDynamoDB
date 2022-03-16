@@ -490,3 +490,22 @@
         and Other one could use GSI to perform the READ Operations
 
 ### Ways to Lower DynamoDB Costs
+
+- DynamoDB Pricing
+  - Provisioned throughput
+  - Data Storage
+  - Data Transfer
+  - Global Tables
+  - Backups
+  - DAX(DynamoDB Accelerator)
+  - DynamoDB Streams
+  - Use Sparse indexes
+  - Project Fewer Attributes
+  - Design for Uniform Workloads
+  - Use Compression
+  - Avoid Scans and filters
+  - Archive Old Data
+  - Use Eventual Consistency
+  - Choose Low-Cost Region
+  - Use Auto-Scaling
+  - Leverage Reserved Capacity
