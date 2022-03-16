@@ -343,6 +343,28 @@
 
 ### Error Handling in DynamoDB
 
+- HTTP 400
+
+  - Error in our request
+  - Authentication Failure
+  - Missing required Parameters
+  - Error will have Exception Code/Error Type, Error Message, and Stack Trace Details
+  - Examples
+    - Access Denied Exception Exception
+    - Conditional Check Failed Exception
+    - Item Collection Size Limit Exceeded Exception
+    - Limit Exceeded Exception
+    - Resource In Use Exception
+    - Resource not found Exception
+    - Validation Exception
+    - Provisioned Throughput Exceeded Exception
+      - Error Retries
+      - Exponential Backoff
+
+- HTTP 5XX
+  - HTTP 500 => Service Side Error
+  - HTTP 503 => Service Unavailable
+
 ### DynamoDB Best Practices
 
 ### Ways to Lower DynamoDB Costs

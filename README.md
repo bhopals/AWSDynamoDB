@@ -30,3 +30,5 @@ AWS Dynamo DB
 - Spread the data UNIFORMLY ACROSS PARTITIONS - READ/WRITES are Uniformaly Distributed across partitions
 - Prevent Operation being Throttled
 - Shard Aggregation using - Batch GET ITEM API
+- Error Retries
+- Exponential Backoff
