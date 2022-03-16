@@ -278,6 +278,20 @@
 
 ### Multi-value Sorts and Filters
 
+- In DynamoDB we can only have two attributes in INDEX (Partition Key and Sort Key)
+- The Sort key allows us to read the itmes in a certain fashion, either in Descending or Ascending Order
+- BUT, what if we want to Sort the Items based on Multiple Attributes
+- For example, we want to Sort the Address Table elements based on `country`, `state`, and `city`
+  - cusomter=abc and country=USA (GSI - cusomter as Partition Key and country as SORT Key )
+  - cusomter=abc and city=1234 (GSI - cusomter as Partition Key and city as SORT Key )
+  - cusomter=abc and state=San Diago (GSI - cusomter as Partition Key and state as SORT Key)
+  - the usual GSI will only let us use any one othe these (`country`, `state`, `city`) as a SORT Key
+- To solve that, we can use Multi-Value Sorts
+  - To do that we create sort key = `country_state_city` and the store the data in single column (country_state_city) with "|" separator
+  - For Example, `US|San Diego|1234` in column name `country_state_city`
+    - While Querying, we can use Partial Sorty Keys
+      - `customer="john" and country_state_city BEGINS_WITH "US|San"`
+
 ### DynamoDB Limits
 
 ### Error Handling in DynamoDB
