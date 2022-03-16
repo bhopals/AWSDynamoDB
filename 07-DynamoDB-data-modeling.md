@@ -294,6 +294,53 @@
 
 ### DynamoDB Limits
 
+- Limits
+
+  - Soft Limits
+  - Hard Limits
+
+- Capacity and Throughput Limits
+
+  - 4 KB per RCU
+  - 1 KB per WCU
+  - 10 GB per partition
+  - 3000 RCUs or 1000 WCUs per partition
+  - Minimum 1 RCUs and 1 WCUs per table or index
+  - Max 40,000 RCUs and WCUs each per table (US EAST Region)
+  - Max 10,000 RCUs and WCUs each per table (Other Regions)
+  - Max 80,000 RCUs and WCUs each per account (US EAST Region)
+  - Max 40,000 RCUs and WCUs each per account (Other Regions)
+  - Max limits are soft limits and can be increased on Request (By contacting AWS Support)
+  - No limit on Scaling up table capacity
+  - Max SACLE DOWN limited to 4 times per Calendar Day (UTC Timezone)
+  - Additional 1 SCALE DOWN if no SCALE DOWN in last 4 hours
+  - Effectively 9 Scale Downs per day
+    - (24/4 = 6 .. make it 5 so have more evenly hours) ==> 5 scale down till 20th hour in the interval of every 4 hours
+    - Remaning Hours (24-20 == 4 hours, you could use daily limit which is 4)
+    - Hence total Max SCALE Down (If Planned Effectively), can be 9(NINE) Times
+  - Max 256 tables per region (Soft Limit)
+
+- Index and Attributes Limits
+
+  - 5 Local Secondary Indexes Per Table
+  - 5 Global Secondary Indexes Per Table
+  - Max 20 user-specified project attribute across all secondary indexes of the Table
+  - Max size of partition key = 2 KB
+  - Max size of sort key - 1 KB
+  - Max size of all items per partition key = 10 GB (Including all LSI's)
+  - For Nested Attributes, max possible nesting is 32 Levels Deep
+
+- API Limit
+
+  - Max 10 Simultaneous requests for table-level Operations (CRUD Operations)
+  - Max 100 Items (up to 16MB in size), returned per BatchGetItem request
+  - Max 25 PutItem or DeleteItem requests(up to 16MB in size) per BatchWriteItem request
+  - Max 1 MB data returned per query or scan request
+
+- Paginated Queries/Reads
+  - LastEvaluatedKey
+  - ExclusiveStartKey
+
 ### Error Handling in DynamoDB
 
 ### DynamoDB Best Practices
