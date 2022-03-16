@@ -32,3 +32,4 @@ AWS Dynamo DB
 - Shard Aggregation using - Batch GET ITEM API
 - Error Retries
 - Exponential Backoff
+- DynamoDB Adaptive Capacity

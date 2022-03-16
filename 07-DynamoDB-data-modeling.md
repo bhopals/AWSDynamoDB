@@ -367,4 +367,66 @@
 
 ### DynamoDB Best Practices
 
+#### TABLE LEVEL BEST PARCTICES
+
+- Uniform Data Access
+
+  - DynamoDB divide the provision throughput equally between all the Partitions
+  - Hence, in order to achieve maximum utilization of the provisioned RCUs and WCUs,
+    we must DESIGN our table keys in such a way that the READ and WRITE loads are Uniform Across Partitions
+  - Examples
+    - Provisioned Capacity = 50 RCUs and 50 WCUs
+    - No. of Partitions = 5
+    - Capacity per Partition = 10 RCUs and 10 WCUs
+
+- Hot Keys or Hot Partitions
+
+  - Time Series Data
+    - Segregate HOT and COLD data into Different Tables
+    - Use DAX for Caching
+  - Popular Datasets
+    - Spreading the Partition Key into Multiple Partition Keys - Sharding
+
+- Burst Capacity
+
+  - 300 Seconds
+  - For occassional Spikes
+  - Not to be relied upon
+
+- DynamoDB Adaptive Capacity
+
+  - For Uniform Workloads
+  - Works Automatically
+  - No Guarantees
+  - 5 to 30 Minutes of Delay
+
+- Temporary Substantial Capacity Scaling
+  - We MUST always remember that substantial increases in Provisioned Capacity almost always result in DynamoDB
+    allocating additional Partitions, and when we subsequently (once our work is done) scale the capacity down,
+    DynamoDB will not de-allocate previously allocated partitions. Since we SCALED Down the capacity each Partition
+    will receive a very small chunk of CAPACITY UNITS, resulting in substantial degradation in performance
+
+#### ITEM LEVEL BEST PARCTICES
+
+- Use Shorte yet Intuitive Attribute Names
+
+  - 400 KB Limit per Item (Attribute Names + Values)
+  - Applies to Attribute Names and Values
+
+- One-to-Many Relationship
+
+  - When to use WHAT?
+    - Sort Keys/Composite Keys
+      - Large Item Sizes
+      - If Querying Multiple Items within a Partition Key is required
+    - Set Types
+      - Small Item Sizes
+      - If Querying Individual Item attribute in Sets is NOT needed (Students By SubjectID)
+
+- Handling Large Item Attributes
+  - Use Compression (GZIP)
+  - Use S3 to store large attributes
+  - Split Large Attrute across multiple items(item1_1, item1_2), and Retrieve using BatchGetItem API
+    - Splitting Partition Keys across Multiple Items
+
 ### Ways to Lower DynamoDB Costs
