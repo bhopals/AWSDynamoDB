@@ -223,6 +223,59 @@
 
 ### DynamoDB Design Patterns
 
+- DynamoDB does not have built-in support for implementing foreign key relationships between two tables.
+- However, our application might demand such a need when where we want to implement such relationships
+- Data Modeling
+
+  - One-to-One
+
+    - Means simple KEY-VALUES
+    - Use Simple Keys (not Composite Keys) on Both Entities
+    - One-to-One Relationship within a Table
+      - To implement this, we simply create a Global Secondary Index (GSI)
+      - Then it will have One-to-One Relationship between the Table PrimaryKey and the GSI
+      - Means we can query ITEM either by Table Primary Key OR the GSI Partition Key
+    - One-to-One Relationship between two Tables
+      - When two tables uses the SAME Primary key.
+        - Example, `student_id` as Primary Key in `Students` and `Grades` Tables (One-to-One relationship)
+      - OR One tables Primary Key is used in GSI as Partition key to ensure 1-1 relationship.
+        - Example, `student_id` as Primary Key in `Students` and GSI partition key in `Grades` Tables (One-to-One relationship)
+
+  - One-to-Many
+
+    - Use Simple Key on one Entity and Composite Key on the other
+    - Example 1
+
+      - Student Table - `student_id`(Partition Key) as Primary Key
+      - Subjects Table - `student_id`(Partition Key) and `subject`(Sort Key) as Primary Key (One-to-Many relationship)
+      - OR Subjects Table - `subject_id`(Partition Key) and GSI with `student_id`(Partition Key) `subject`(Sort Key) - (One-to-Many relationship)
+      - OR Just Store Subjects in Student Table as SET ({Math, Physics}) - (One-to-Many relationship)
+
+    - When to use Sort Keys/Composite Keys
+      - Large Item Sizes
+      - If Querying Multiple Items within a Partition Key is required
+    - When to use Set Types
+      - Small Item Sizes
+      - If Querying Individual Item attribute in Sets is NOT needed (Students By SubjectID)
+
+  - Many-to-Many
+
+    - Composite Keys or Indexes on Both entities
+    - The easiest way to Implement Many-to-Many relationship is using a Table and GSI with Partition and Sort Attributes SWITCHED
+    - Example
+      - Students Table
+      - Partition Key and Sort Keys SWITCHED in created Primary Key and GSI
+      - Create Primary Key on Students Table using `student_id`(Partition Key) and `subject_id`(Sort Key)
+      - Create GSI on Students Table using `subject_id`(Partition Key) and `student_id`(Sort Key)
+
+  - Hierarchical Data Structures
+    - There are two ways to Model Hierarchical Data Structures
+      - Table Items
+        - Composite Keys
+        - By Using Partition Key and Sort Key Combinations
+      - JSON Documents
+        - Store documents as JSON Documents (Map Data Type)
+
 ### Multi-value Sorts and Filters
 
 ### DynamoDB Limits
