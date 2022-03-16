@@ -424,9 +424,69 @@
       - If Querying Individual Item attribute in Sets is NOT needed (Students By SubjectID)
 
 - Handling Large Item Attributes
+
   - Use Compression (GZIP)
   - Use S3 to store large attributes
   - Split Large Attrute across multiple items(item1_1, item1_2), and Retrieve using BatchGetItem API
     - Splitting Partition Keys across Multiple Items
+
+- Best Practices for READ Operations
+
+  - Avoid SCANS
+  - Avoid Filters (As they are applied only after the QUERY and SCAN Operations)
+  - Use Eventual Consistency
+    - Any operation on GSIs are ALWAYS Eventual Consistent
+
+- Best Practices when using Local Secondary Indexes (LSI)
+
+  - Use LSIs Sparingly
+    - Shares same Partition Space/Storage and Throughput Capacity (RCUs and WCUs)
+  - Project Fewer Attributes
+    - We have Maximum of 20 ITEMS per Index, so choose them Carefully
+    - Projection Options:
+      - KEYS_ONLY - Return the Index Partition and Sort Keys
+      - INCLUDE - Retrun Specified Fields Only
+      - ALL - Return entire Table Item
+    - Also, it is important to project all the attributes that your application needs else if your READ Operation
+      requests additional parameters which are not Projected in the INDEX, DynamoDB will have to fetch those attributes
+      from the TABLE, and this is going to result in an additional read operation. This uses as more READ Capacity UNITS
+      and it also introduces more Latency so spend good amount of time before deciding on which attributes to project in your INDEX.
+      The Idea is to consider all the current and future possibilities of the READ operations that our application can possibly need to perform.
+  - Use Sparse Indexes
+
+    - An Index that has fewer items as compared to the items in the base table.
+    - We know that Local Secondary Indexes(LSI) have the same partition key as of the Primary key of the TABLE.
+      In other words, it is just the sort keys in LSI that is different. And not every item in the table is going to have
+      the sort key attribute corresponding to the Local Secondary Indexes. So no. of ITEMS in the LSI could be less
+      than the total number of items in the BASE Table. So In this case, the INDEX is called a SPARSE Index because it has fewer items
+      than the main table.
+    - Sparse Indexes are very useful for queries on attributes that don't appear in most table items.
+    - Example (Sparse Index)
+      - Tickets Table
+        - `customer_id`, `ticket_id`, `ticket`, `is_open` ....
+        - Primary Partition Key - `customer_id`
+        - Primary Sort Key - `ticket_id`
+      - Create a LSI with - `customer_id` as Partition Key, and `is_open` as SORT Key
+      - `is_open` - will only have some status values if Ticket is `in_progress`, `open`, `on_hold`
+      - `is_open` - Property/attribute will not exist if Ticket is RESOLVED/CLOSED
+      - Means the created LSI will have fewer Items then the Base table Item
+
+  - Watch for Expanding Item Collections
+    - Have 10GB partition Limit
+    - So if we have multiple LSI's and with collection of Items in it, we may end up running out of space soon
+    - One way to reduce no. of Items in a partition is to use Partition Sharding (Contestant Example)
+
+- Best Practices for Global Secondary Indexes (GSI)
+  - Design for Uniform Workloads
+  - Use Sparse Indexes
+  - Project Fewer Attributes
+  - Eventually Consistent Read Replicas
+    - One TRICK is to create a Same GSI as Tables Primary Key
+    - Advantages:
+      - Easier to Divert some of the Load from the Main Table to the Index (GSI)
+      - Also, we can control the throughtput separatly
+      - And if you have multiple Application that read from this table, and you want to control throughput
+        individually for each application. In this case One APP can use Table's Primary Key,
+        and Other one could use GSI to perform the READ Operations
 
 ### Ways to Lower DynamoDB Costs

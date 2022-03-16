@@ -33,3 +33,7 @@ AWS Dynamo DB
 - Error Retries
 - Exponential Backoff
 - DynamoDB Adaptive Capacity
+- Substaintial reduction in READ Operations
+- Table Keys - Primary Partition Key, Primary Sort Key
+- Local Secondary Index(LSI)/Global Secondary Index(GSI) - Partition Key, Sort Key
+- One way to reduce no. of Items in a partition is to use Partition Sharding (Contestant Example)
