@@ -48,3 +48,7 @@ AWS Dynamo DB
 - Much Simpler and Intuitive approach
 - Lambda React to the Event Changes
 - Lambda is a Function as a Service(FaaS)
+- Global Tables provide an autmatic multi master cross-region replication to AWS Regions across the Globe.
+- DynamoDB does all the Heavy-Lifting in the background
+- For GLOBAL Tables, DynamoDB uses "Last Writer Wins" to resolve any conflicts
+- High Velocity WRITES

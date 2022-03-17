@@ -131,3 +131,31 @@
 - If we want expired data to be archived/moved into another table, we can use DynamoDB Triggers + Lambda Functions
 
 ### Global Tables in DynamoDB
+
+- Global Tables are DynamoDB's built-in solution for Cross-region replication
+- Why do we need Cross-Region Replication?
+
+  - We might have uses spread across the world, and if our tables are located in us-west-2, then the
+    LATENCY (Response time experienced) by users in the diagonally opposite part of the Glove might be much HIGER than
+    the People in Oregan are in the United State. So you may want to place a Replica of your DynamoDB Table in Europe,
+    and this would simply improve the application Response Times for Users in Europe.
+  - You could also achieve this using DynamoDB Streams, by replicating Data in Multiple Tables in other REGIONS;
+  - However, DynamoDB now PROVIDES us with a BUILT-IN Solution to address this situation, and its called as the GLOBAL Tables.
+  - So we no longer have to build and maintain a Custom Replication Solution.
+
+- Global Tables are easy to setup, and they take away aby complexity that might be introduced by our OWN Custom Replication Solutions.
+- Global Tables provide an autmatic multi master cross-region replication to AWS Regions across the Globe.
+- When we create a Global Table, we simply specify the regions in which we want to have the table replicas.
+  And DynamoDB does all the Heavy-Lifting in the background to ensure our records remain in Sync and Provide us the Desired Latency
+
+- Global Tables (Conditions or Prerequisites)
+  - Tables must be Empty across Regions (When Adding a new regions or setting it up initially)
+  - Only ONE Replica per Region
+  - Same Table Name and Keys Across Regions
+  - Table also should have Streams Enabled with "New and Old Images"
+  - DynamoDB also adds some attributes to the Global Tables (such as "aws:rep:"), so we should never alter any of these attributes
+  - Near Real-Time Replication
+  - Eventual Consistency for CROSS REGIONS READS
+  - Strong Consistency for SAME REGIONS READS
+  - DynamoDB uses "Last Writer Wins" to resolve any conflicts
+  - We should use consistent Settings for Tables and Indexes across Regions
