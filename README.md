@@ -39,3 +39,8 @@ AWS Dynamo DB
 - One way to reduce no. of Items in a partition is to use Partition Sharding (Contestant Example)
 - High READ/WRITE Workloads
 - Provisioned Capacity
+- DynamoDB Accelerator (DAX)
+- WRITE-THROUGH Approach
+- READ INTENSIVE Operations
+- How long your application can tolerate the INCONSISTENT READS
+- Create a DAX Cluster and Integrate DAX in our DynamoDB Application

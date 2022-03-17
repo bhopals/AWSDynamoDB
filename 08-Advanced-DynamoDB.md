@@ -24,6 +24,54 @@
 
 ### DynamoDB Accelerator(DAX)
 
+- DynamoDB Responses are Single DIGIT Milliseconds
+- For More Faster response time (Microseconds), we could use DynamoDB Service called DynamoDB Accelerator(DAX)
+- DAX Brings down the DynamoDB response time from MILLISECONDS to MICROSECONDS
+- DynamoDB Accelerator(DAX)
+  - In-Memory Caching
+  - Microsecond Latency
+- DAX Sits between your APPLICATION and DynamoDB, and it acts as a PROXY for all the requests directed to it.
+- If it is WRITE Operation, Data is returned to DAX as well as to DynamoDB
+- For Write Operation, DAX uses WRITE-THROUGH Approach
+  - It means data is first writted to DynamoDB, and then to DAX, and only if both of these WRITES are successful,
+    the WRITE operation is considered to be successful
+- If it is READ operation, and DAX has the DATA, which is called CACHE HIT, DAX will simply return the response without going to DynamoDB
+- If it is READ operation, and DAX does not have the DATA, which is called CACHE MISS,
+  the Data will be returned from DynamoDB and also updated in DAXs Primary or Master Node.
+- Only ITEM Level Operations (DATA Related) can be processed through DAX, not TABLE Level Operations (GSI, LSI, Table Config. etc.)
+- DAX is highly compatible with DynamoDB as well DynamoDB SDK
+- BENEFITS of DAX
+  - Cost Savings
+  - Microsecond Latency
+  - Helps Prevent Hot Partitions
+  - Minimum Code Changes
+- DAX is useful if our application is READ INTENSIVE or have Repeated READS of the Same DATA
+- LIMITATIONS OF DAX
+  - Only Eventual Consistency
+  - Not for Write-Heavy Applications
+- DAX Cluster
+  - To use DAX, we use DAX Cluster
+  - A DAX Cluster Consist of one or more NODES
+  - We can use 10 Nodes per Cluster
+  - Each Node is like an instance of DAX, with ONE MASTER/PRIMARY Node, and Remaining ones act as a READ REPLICAS/READER NODES
+  - DAX Internally handles Load Balancing between those NODES.
+- DAX Caches
+  - Internally DAX has TWO Types of Caches
+    - Item Cache
+      - Stores the results of INDEX READS
+      - In other words, it stores the results of getItem, and batchGetItem operations
+      - Items in the ITEM CACHE have default TTL or time to live setting off about 5 MINUTES
+      - The TTL can be specified while creating DAX CLUSTER
+      - Also, if CACHE Gets Full, DynamoDB automatically removes older or less frequently accessed items from Item CACHE
+    - Query Cache
+      - Stores the results of QUERY or SCAN Operations
+      - Default TTL 5 MINUTES
+      - It is WORTH metioning here that Updates to the Item CACH or Corresponse DynamoDB Tables do not INVALIDATE the Query Cache
+      - Hence the TTL value for the QUERY Cache should be choosen depending on how long your application can tolerate the INCONSISTENT READS.
+- When we request strongly consistent READS, they will be served directly from DynamoDB, and will not be updated in DAX
+- WRITE-Through Approach - Writes in DynamoDB as well as in DAX
+- WRITE-Around Approach - Writes in DynamoDB Only (Skips/Bypass the DAX)
+
 ### DynamoDB Streams and DynamoDB Triggers with AWS Lambda
 
 ### Time to Live (TTL) in DynamoDB
