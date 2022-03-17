@@ -114,4 +114,20 @@
 
 ### Time to Live (TTL) in DynamoDB
 
+- Time to Live or TTL is a very Simple and Convenient Feature in DynamoDB,
+- It allows us to tell the DynamoDB when to delet an item from the TABLE.
+- TTL Attributes
+  - Defines expiry timestamp of the table item (EPOCH or UNIX Timestamp)
+  - Items marked for deletion on expiry
+  - Expired items are removed from the table and indexes within about 48 HOURS
+  - Application should use filter operations to exclude items marked for deletion
+- Enable TTL
+
+  - Create/Add an attribute in DynamDB Item with any name, for example - "expires"
+  - It should be of number type, and should have timestamp value (Future time that we want as expiry/ttl value)
+  - GO to Overview ==> Manage TTL ==> Add the name of the TTL Attribute "expires" ==> Run Preview (To Test it) ==> Save
+
+- The TTL Feature can be very useful, especially with time series tables, such as, a table that stores Daily Temperature
+- If we want expired data to be archived/moved into another table, we can use DynamoDB Triggers + Lambda Functions
+
 ### Global Tables in DynamoDB
