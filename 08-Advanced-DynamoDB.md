@@ -74,6 +74,9 @@
 
 ### DynamoDB Streams and DynamoDB Triggers with AWS Lambda
 
+- DynamoDB Streams can be used to Trigger AWS Lambda Functions, and these Lambda functions in turn
+  can automatically react to changes in our DynamoDB tables.
+
 ### Time to Live (TTL) in DynamoDB
 
 ### Global Tables in DynamoDB

@@ -44,3 +44,4 @@ AWS Dynamo DB
 - READ INTENSIVE Operations
 - How long your application can tolerate the INCONSISTENT READS
 - Create a DAX Cluster and Integrate DAX in our DynamoDB Application
+- With DynamoDB Streams integartion with Lambda Function, Lambda Funciton can automatically react to changes in our DynamoDB tables.
