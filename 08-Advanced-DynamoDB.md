@@ -77,6 +77,41 @@
 - DynamoDB Streams can be used to Trigger AWS Lambda Functions, and these Lambda functions in turn
   can automatically react to changes in our DynamoDB tables.
 
+- DynamoDB Streams maintains a time ordered log of all the changes in the given DynamnoDB Table.
+  This log stores all the time activity that took place in the last 24 HOURS Period.
+
+- DynamoDB Streams
+
+  - 24 HOURS Time-ordered Log, and can be used for:
+    - Replication
+    - Archival
+    - Notifications on Data Change
+    - Logging
+  - The Use Cases can be numurous, and there are several ways to consume and process the data from the DynamoDB Streams
+
+  - DynamoDB Streams ==> Kinesis Adapter + KCL(Kinesis Client Library) / DynamoDB Streams SDK / AWS LAmbda Triggers
+    - Kinesis is a platform for processing high volume streaming data on AWS
+    - Another way to work with DynamoDB Streams is using the DynamoDB Streams SDK
+    - Much Simpler and Intuitive approach - AWS Lambda Triggers/Events
+      - Events/Triggers Fires on the based on the activity within the DynamoDB Streams.
+        Means when there is a changes to the ITEMS in the DynamoDB Table, if the DynamoDB Streams
+        are enable for that table, these changes would be written to DynamoDB Stream. Once triggered, the
+        lambda function then can run are called REACT to these Items changes.
+        AWS Lambda Function is an AWS Service that allows you to run your code in Serverless Environment.
+        In other words, Lambda is a Function as a Service(FaaS)
+
+- To Enable Streams, Click on Oveview ==> MANAGE STREAM and select one of the OPTIONS given:
+  - Keys only - only the key attributes of the modified item
+  - New Image - the entire item, as it appears after it was modified
+  - Old Image - the entire item, as it appears before it was modified
+  - New and Old Image - both the new and old Image of the Item
+- By choosing one of the option here, we tell DynamDB that whenever there is a change to any item in the table, what data should
+  we return to the underlying stream?
+- Once one of the options SELECTED, Clink on ENABLE Stream Button to Enable DynamoDB Streams
+
+- To attach Trigger to the Stream, click on Triggers Section ==> Create Trigger ==> Create Lambda/Select Existing
+  ==> Set Trigger Name ==> Select Batch Size ==> create trigger
+
 ### Time to Live (TTL) in DynamoDB
 
 ### Global Tables in DynamoDB

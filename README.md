@@ -45,3 +45,6 @@ AWS Dynamo DB
 - How long your application can tolerate the INCONSISTENT READS
 - Create a DAX Cluster and Integrate DAX in our DynamoDB Application
 - With DynamoDB Streams integartion with Lambda Function, Lambda Funciton can automatically react to changes in our DynamoDB tables.
+- Much Simpler and Intuitive approach
+- Lambda React to the Event Changes
+- Lambda is a Function as a Service(FaaS)
