@@ -37,3 +37,5 @@ AWS Dynamo DB
 - Table Keys - Primary Partition Key, Primary Sort Key
 - Local Secondary Index(LSI)/Global Secondary Index(GSI) - Partition Key, Sort Key
 - One way to reduce no. of Items in a partition is to use Partition Sharding (Contestant Example)
+- High READ/WRITE Workloads
+- Provisioned Capacity
