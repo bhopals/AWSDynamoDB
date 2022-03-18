@@ -135,7 +135,7 @@
 - Global Tables are DynamoDB's built-in solution for Cross-region replication
 - Why do we need Cross-Region Replication?
 
-  - We might have uses spread across the world, and if our tables are located in us-west-2, then the
+  - We might have uses spread across the world (multi regions), and if our tables are located in us-west-2, then the
     LATENCY (Response time experienced) by users in the diagonally opposite part of the Glove might be much HIGER than
     the People in Oregan are in the United State. So you may want to place a Replica of your DynamoDB Table in Europe,
     and this would simply improve the application Response Times for Users in Europe.
