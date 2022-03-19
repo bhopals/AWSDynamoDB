@@ -1,4 +1,4 @@
-## Advanced DynamoDB
+## Advanced DynamoDB Concepts
 
 ### Auto Scaling in DynamoDB
 
