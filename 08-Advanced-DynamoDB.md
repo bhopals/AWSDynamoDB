@@ -13,7 +13,7 @@
   - Max SACLE DOWN limited to 4 times per Calendar Day (UTC Timezone)
   - Additional 1 SCALE DOWN if no SCALE DOWN in last 4 hours
   - Effectively 9 Scale Downs per day
-    - (24/4 = 6 .. make it 5 so have more evenly hours) ==> 5 scale down till 20th hour in the interval of every 4 hours
+    - (24/4 = 6 ... make it 5 so have more evenly hours) ==> 5 scale down till 20th hour in the interval of every 4 hours
     - Remaning Hours (24-20 == 4 hours, you could use daily limit which is 4)
     - Hence total Max SCALE Down (If Planned Effectively), can be 9(NINE) Times
 - While setting up SCALING, we simply tell DynamoDB the Minimum and Maximum capacity units between which to SCALE the CAPACITY automatically
