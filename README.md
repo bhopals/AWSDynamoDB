@@ -52,3 +52,4 @@ AWS Dynamo DB
 - DynamoDB does all the Heavy-Lifting in the background
 - For GLOBAL Tables, DynamoDB uses "Last Writer Wins" to resolve any conflicts
 - High Velocity WRITES
+- More frequent Data access with microseconds to milliseconds latency
