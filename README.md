@@ -43,7 +43,7 @@ AWS Dynamo DB
 - WRITE-THROUGH Approach
 - READ INTENSIVE Operations
 - How long your application can tolerate the INCONSISTENT READS
-- Create a DAX Cluster and Integrate DAX in our DynamoDB Application
+- Create a DAX (DynamoDB Accelerator) Cluster and Integrate DAX in our DynamoDB Application
 - With DynamoDB Streams integartion with Lambda Function, Lambda Funciton can automatically react to changes in our DynamoDB tables.
 - Much Simpler and Intuitive approach
 - Lambda React to the Event Changes
