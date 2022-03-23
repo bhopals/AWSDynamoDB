@@ -288,7 +288,7 @@
   - the usual GSI will only let us use any one othe these (`country`, `state`, `city`) as a SORT Key
 - To solve that, we can use Multi-Value Sorts
   - To do that we create sort key = `country_state_city` and the store the data in single column (country_state_city) with "|" separator
-  - For Example, `US|San Diego|1234` in column name `country_state_city`
+  - For Example, `US|San Diego|1234332` in column name `country_state_city`
     - While Querying, we can use Partial Sorty Keys
       - `customer="john" and country_state_city BEGINS_WITH "US|San"`
 
